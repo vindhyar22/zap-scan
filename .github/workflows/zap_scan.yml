@@ -13,9 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Download ZAP
+        run: |
+          wget -O zap.tar.gz https://github.com/zaproxy/zaproxy/releases/download/v2.10.0/ZAP_2.10.0_Core.tar.gz
+          tar -xvf zap.tar.gz
+          chmod +x ZAP_2.10.0/zap.sh
 
       - name: Start ZAP
-        run: /opt/zaproxy/zap.sh -daemon -port 8080   # Replace with the correct path to your zap.sh script
+        run: ./ZAP_2.10.0/zap.sh -daemon -port 8080
 
       - name: Import Swagger file
         run: zap-cli openapi.load https://petstore.swagger.io/v2/swagger.json
