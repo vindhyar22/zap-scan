@@ -13,12 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install ZAP dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y default-jre-headless
-          sudo apt-get install -y python3-pip
-          pip3 install --user zapcli
+ 
 
       - name: Check ZAP installation
         run: |
