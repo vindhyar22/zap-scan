@@ -1,0 +1,42 @@
+name: ZAP Scan
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install ZAP dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y default-jre-headless
+          sudo apt-get install -y python3-pip
+          pip3 install --user zapcli
+
+      - name: Start ZAP
+        run: zap.sh -daemon -port 8080
+
+      - name: Import Swagger file
+        run: zap-cli openapi.load https://petstore.swagger.io/v2/swagger.json
+
+      - name: Spider API endpoints
+        run: zap-cli active_scan.scan -r "Default Policy" -G https://petstore.swagger.io/v2/swagger.json
+
+      - name: Wait for scan completion
+        run: |
+          while [[ $(zap-cli active_scan.status) == *"running"* ]]; do
+            sleep 10
+          done
+
+      - name: Generate ZAP report
+        run: zap-cli report -o zap_report.html -f html
+
+      - name: Stop ZAP
+        run: zap-cli shutdown
