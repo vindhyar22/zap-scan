@@ -19,6 +19,11 @@ jobs:
           sudo apt-get install -y default-jre-headless
           sudo apt-get install -y python3-pip
           pip3 install --user zapcli
+          
+       - name: Check ZAP installation
+           run: |
+              ls -al /opt/zaproxy   # Replace with your ZAP installation directory
+
 
       - name: Start ZAP
         run: zap.sh -daemon -port 8080
