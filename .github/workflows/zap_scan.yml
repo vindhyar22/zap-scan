@@ -13,11 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
- 
-
-      - name: Check ZAP installation
-        run: |
-          ls -al /opt/zaproxy   # Replace with your ZAP installation directory
 
       - name: Start ZAP
         run: /opt/zaproxy/zap.sh -daemon -port 8080   # Replace with the correct path to your zap.sh script
