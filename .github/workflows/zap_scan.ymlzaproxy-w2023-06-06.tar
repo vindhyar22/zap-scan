@@ -15,7 +15,8 @@ jobs:
 
       - name: Download ZAP
         run: |
-          wget -O zap.tar.gz https://github.com/zaproxy/zaproxy/releases/download/v2.10.0/ZAP_2.10.0_Core.tar.gz
+     
+          wget -O zap.tar.gz https://github.com/zaproxy/zaproxy/releases/tag/w2023-06-06/zaproxy-w2023-06-06.tar.gz
           tar -xvf zap.tar.gz
           chmod +x ZAP_2.10.0/zap.sh
 
