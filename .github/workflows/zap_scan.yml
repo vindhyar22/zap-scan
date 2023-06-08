@@ -15,12 +15,12 @@ jobs:
 
       - name: Download ZAP
         run: |
-          curl -LO https://github.com/zaproxy/zaproxy/releases/download/v2.12.0/ZAP_2.12.0_Core.zip
-          unzip ZAP_2.12.0_Core.zip
-          chmod +x ZAP_2.10.0/zap.sh
+          curl -LO  https://github.com/zaproxy/zaproxy/releases/download/v2.12.0/ZAP_2.12.0_Linux.tar.gz
+          tar -xvf ZAP_2.12.0_Linux.tar.gz
+          chmod +x ZAP_2.12.0/zap.sh
 
       - name: Start ZAP
-        run: ./ZAP_2.10.0/zap.sh -daemon -port 8080
+        run: ./ZAP_2.12.0/zap.sh -daemon -port 8080
 
       - name: Import Swagger file
         run: zap-cli openapi.load https://petstore.swagger.io/v2/swagger.json
