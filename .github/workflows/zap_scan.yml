@@ -19,14 +19,13 @@ jobs:
           sudo apt-get install -y default-jre-headless
           sudo apt-get install -y python3-pip
           pip3 install --user zapcli
-          
-       - name: Check ZAP installation
-           run: |
-              ls -al /opt/zaproxy   # Replace with your ZAP installation directory
 
+      - name: Check ZAP installation
+        run: |
+          ls -al /opt/zaproxy   # Replace with your ZAP installation directory
 
       - name: Start ZAP
-        run: zap.sh -daemon -port 8080
+        run: /opt/zaproxy/zap.sh -daemon -port 8080   # Replace with the correct path to your zap.sh script
 
       - name: Import Swagger file
         run: zap-cli openapi.load https://petstore.swagger.io/v2/swagger.json
